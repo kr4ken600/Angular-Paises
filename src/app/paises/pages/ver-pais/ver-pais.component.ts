@@ -12,6 +12,15 @@ import { IPaisResponse } from '../../interfaces/pais.interface';
 export class VerPaisComponent implements OnInit {
   pais!: IPaisResponse;
 
+  fields: string[] = [
+    'name',
+    'flags',
+    'population',
+    'capital',
+    'region',
+    'borders',
+  ];
+
   constructor(
     private activatedR: ActivatedRoute,
     private paisesSvc: PaisService
@@ -20,11 +29,10 @@ export class VerPaisComponent implements OnInit {
   ngOnInit(): void {
     this.activatedR.params
       .pipe(
-        switchMap(({ id }) => this.paisesSvc.buscarPais(id, 'alpha')),
-        tap(console.log)
+        switchMap(({ id }) => this.paisesSvc.buscarPais(id, 'alpha',this.fields))
       )
-      .subscribe((res) => {
-        this.pais = res[0];
+      .subscribe((res: any) => {
+        this.pais = res;
       });
   }
 }

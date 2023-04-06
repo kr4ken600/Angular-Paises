@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IPaisResponse } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { fieldsTable } from '../../utils/constantes';
 
 @Component({
   selector: 'app-por-capital',
@@ -20,7 +21,7 @@ export class PorCapitalComponent {
     this.termino = termino;
 
     if (this.termino.slice().length !== 0) {
-      this.paisSvc.buscarPais(this.termino, 'capital').subscribe({
+      this.paisSvc.buscarPais(this.termino, 'capital', fieldsTable).subscribe({
         next: (res: IPaisResponse[]) => {
           this.paises = res;
           this.error = false;

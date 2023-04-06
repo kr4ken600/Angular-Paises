@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPaisResponse } from '../interfaces/pais.interface';
@@ -11,10 +11,14 @@ export class PaisService {
 
   constructor(private http: HttpClient) {}
 
-  buscarPais(query: string, tipo: string): Observable<IPaisResponse[]> {
+  buscarPais(query: string, tipo: string, fields: string[]): Observable<IPaisResponse[]> {
+    const fieldsS = fields.join(',')
+    const params = new HttpParams().set('fields', fieldsS);
+
+
     const url = `${this.urlBase}/${tipo}/${query}`;
 
-    return this.http.get<IPaisResponse[]>(url);
+    return this.http.get<IPaisResponse[]>(url, {params});
   }
 
 }

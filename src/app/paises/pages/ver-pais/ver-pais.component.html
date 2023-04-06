@@ -36,7 +36,7 @@
   <h5>Colinda con:</h5>
   <div class="row">
     <div class="col">
-      <span class="badge bg-primary mx-1" *ngFor="let item of pais.borders">{{
+      <span class="badge bg-primary mx-1" *ngFor="let item of pais.borders" [routerLink]="['/pais', item]" routerLinkActive="router-link-active">{{
         item
       }}</span>
     </div>
